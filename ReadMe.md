@@ -7,9 +7,12 @@ AKDE provides a fast, adaptive kernel density estimator based on the Gaussian Mi
 You can install it via pip:  pip install akde
 
 # Usage
-Providing any data (geoscience, astronomy, physics...) in n by d numpy array (n rows, d columns)
+Providing any data (economy, biology, geoscience, astronomy, physics...) in n by d numpy array (n rows, d columns)
+```
 from akde import akde
 pdf, meshgrids, bandwidth = akde(data)
+
+```
 
 # KDE Visualization
 Using contour plot or imshow for 2D data, isosurface or volume plot for 3D data
