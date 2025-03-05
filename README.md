@@ -15,6 +15,9 @@ from akde import akde
 pdf, meshgrids, bandwidth = akde(data)
 
 ```
+# 3D data
+
+![3D Data Density Plot](https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/1D_KDEs_with_Metrics.png)
 
 # KDE Visualization
 Using contour plot or imshow for 2D data, isosurface or volume plot for 3D data
