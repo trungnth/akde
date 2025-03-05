@@ -14,6 +14,104 @@ Providing any data X in numpy array with shape (n,d) (n rows, d columns)
 ```python
 pdf, meshgrids, bandwidth = akde(X)
 ```
+# EXAMPLES
+
+# 1D data
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+from akde import akde
+
+# Set random seed for reproducibility
+np.random.seed(42)
+n_samples = 1000
+
+# Define 5 Gaussian mixture components (means, standard deviations, and weights)
+means = [-4, -2, 0, 2, 4]       # Different means
+stds = [0.5, 0.8, 0.3, 0.7, 1.0]  # Different standard deviations
+weights = [0.2, 0.15, 0.25, 0.2, 0.2]  # Different weights (sum to 1)
+
+# Generate samples from each Gaussian distribution
+data = np.hstack([
+    np.random.normal(mean, std, int(n_samples * weight))
+    for mean, std, weight in zip(means, stds, weights)
+]).reshape(-1, 1)  # Reshape to (n,1) for AKDE
+
+# Perform adaptive kernel density estimation
+pdf, meshgrids, bandwidth = akde(data)
+
+# Reshape the PDF to match the shape of the grid
+pdf = pdf.reshape(meshgrids[0].shape)
+
+# Compute the true density function by summing individual Gaussians
+true_pdf = np.sum([
+    weight * norm.pdf(meshgrids[0], mean, std)
+    for mean, std, weight in zip(means, stds, weights)
+], axis=0)
+
+# Plot the density estimation, true distribution, and histogram
+plt.figure(figsize=(8, 5))
+plt.hist(data, bins=50, density=True, alpha=0.3, color='gray', label="Histogram (normalized)")
+plt.plot(meshgrids[0], pdf, label="AKDE", color='blue', linewidth=2)
+plt.plot(meshgrids[0], true_pdf, label="True Distribution", color='red', linestyle='dashed', linewidth=2)
+plt.xlabel("X")
+plt.ylabel("Density")
+plt.title("Histogram vs AKDE vs True Distribution")
+plt.legend()
+plt.savefig("1D-AKDE-Density.png", transparent=False, dpi=600, bbox_inches="tight")
+plt.show()
+```
+![1D Data Density Plot](https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/1D-AKDE-Density.png)
+
+# 2D data
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from akde import akde
+
+# Generate synthetic 2D mixture distribution data
+np.random.seed(42)
+n_samples = 1000
+
+# Define mixture components
+mean1, cov1 = [2, 2], [[0.5, 0.2], [0.2, 0.3]]
+mean2, cov2 = [-2, -2], [[0.6, -0.2], [-0.2, 0.4]]
+mean3, cov3 = [2, -2], [[0.4, 0], [0, 0.4]]
+
+# Sample from Gaussian distributions
+data1 = np.random.multivariate_normal(mean1, cov1, n_samples // 3)
+data2 = np.random.multivariate_normal(mean2, cov2, n_samples // 3)
+data3 = np.random.multivariate_normal(mean3, cov3, n_samples // 3)
+
+# Combine data into a single dataset
+X = np.vstack([data1, data2, data3])
+
+# Perform adaptive kernel density estimation
+pdf, meshgrids, bandwidth = akde(X)
+
+# Reshape the PDF to match the shape of the grid
+pdf = pdf.reshape(meshgrids[0].shape)
+
+# Plot the density estimate
+plt.figure(figsize=(8, 6))
+plt.imshow(pdf, extent=[meshgrids[0].min(), meshgrids[0].max(),
+                        meshgrids[1].min(), meshgrids[1].max()],
+           origin='lower', cmap='turbo', aspect='auto')
+
+plt.colorbar(label="Density")
+plt.scatter(X[:, 0], X[:, 1], s=5, color='white', alpha=0.3, label="Data points")
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("2D DATA DENSITY PLOT")
+plt.legend()
+plt.savefig("2D-AKDE-Density.png", transparent=False, dpi=600, bbox_inches="tight")
+plt.show()
+```
+![2D Data Density Plot](https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/2D-AKDE-Density.png)
+
 # 3D data
 
 ```python
@@ -80,13 +178,22 @@ fig.update_layout(
 
 # Export interactive plot in html, for export static figure install kaleido: pip install kaleido
 fig.write_html("3d-density-akde-plotly.html")
-# The 3D density plot from akde contains 128^3 points by default, it is not recommended to show Plotly interactive plot in ipynb
+# The 3D density plot from akde contains 128^3 points by default,
+# it is not recommended to show Plotly interactive plot in ipynb
 ```
 
 ![3D Data Density Plot](https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/3d-density.png)
 
-# KDE Visualization
-Using contour plot or imshow for 2D data, isosurface or volume plot for 3D data
+# Performance Test
+Below, we compare the performance of AKDE with different KDE implementations in Python by calculating the Mean Squared Error (MSE), Kullback–Leibler (KL) divergence, and Jensen–Shannon (JS) divergence between the estimated density and the true distribution.
+
+## 1D KDE implementations with performance metrics
+
+![1D KDE Performance Test](https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/1D_KDEs_with_Metrics.png)
+
+## 2D KDE implementations with performance metrics
+
+![2D KDE Performance Test](https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/2D_KDEs_with_Metrics.png)
 
 
 [matlab]: https://www.mathworks.com/matlabcentral/fileexchange/58312-kernel-density-estimator-for-high-dimensions
