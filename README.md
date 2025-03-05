@@ -1,4 +1,4 @@
-﻿# AKDE: Adaptive Kernel Density Estimation
+﻿# AKDE: Apdaptive Multivariate Kernel Density Estimation via Gaussian Mixture Model
 
 AKDE provides a fast, adaptive kernel density estimator based on the Gaussian Mixture Model for multidimensional data. The [original MATLAB implementation][matlab] by Zdravko Botev does not appear to reference the algorithm described in the [corresponding paper][paper]. This Python re-implementation includes automatic grid construction for arbitrary dimensions and provides a detailed explanation of the method.
 
@@ -12,11 +12,12 @@ pip install akde
 Providing any data X in numpy array with shape (n,d) (n rows, d columns)
 
 ```python
-pdf, meshgrids, bandwidth = akde(X)
+from akde import akde
+pdf, meshgrids, bandwidth = akde(X, ng=None, grid=None, gam=None)
 ```
 # EXAMPLES
 
-# 1D data
+## 1D data
 
 ```python
 import numpy as np
@@ -65,7 +66,7 @@ plt.show()
 ```
 ![1D Data Density Plot](https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/1D-AKDE-Density.png)
 
-# 2D data
+## 2D data
 
 ```python
 import numpy as np
@@ -112,7 +113,7 @@ plt.show()
 ```
 ![2D Data Density Plot](https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/2D-AKDE-Density.png)
 
-# 3D data
+## 3D data
 
 ```python
 import numpy as np
@@ -199,9 +200,23 @@ Below, we compare the performance of AKDE with different KDE implementations in 
 [matlab]: https://www.mathworks.com/matlabcentral/fileexchange/58312-kernel-density-estimator-for-high-dimensions
 [paper]: https://dx.doi.org/10.1214/10-AOS799
 
-# AKDE: Apdaptive Multivariate Kernel Density Estimation via Gaussian Mixture Model
+# The Math Behind AKDE
 
-Given a dataset $X = \{x_1, x_2, \dots, x_n\}$ in $\mathbb{R}^d$, GMM models the density $f(x)$ of $X$ as a mixture of $K$ Gaussian components, expressed as:
+Kernel density estimation is a widely used statistical tool for estimating the probability density function of data from a finite sample. Traditional KDE techniques estimate the density using a weighted sum of kernel functions centered at the data points. The density is expressed as:
+
+$$
+\hat{f}(x) = \frac{1}{n h^d} \sum_{i=1}^n K\left(\frac{x - X_i}{h}\right),
+$$
+
+where $n$ is the sample size, $h$ is the bandwidth controlling the level of smoothing, $d$ is the dimensionality of the data, and $K$ is the kernel function, commonly chosen as the Gaussian kernel:
+
+$$
+K(x) = (2\pi)^{-d/2} \exp\left(-\frac{\|x\|^2}{2}\right).
+$$
+
+Despite its utility, traditional KDE suffers from a major challenge: the scaling efficiently to high-dimensional datasets aka $\texttt{The curse of dimensionality}$. The $\texttt{AKDE}$ method seeks to address these limitations by representing the density as a weighted sum of Gaussian components and refining the parameters of this mixture model iteratively using **Expectation-Maximization (EM) algorithm**. Unlike classical KDE, which evaluates kernel functions directly for all data points, the $\texttt{AKDE}$ method uses a subset of representative points to approximate the density, significantly reducing computational complexity for high-dimensional data.
+
+Given a dataset $X = \{x_1, x_2, \dots, x_n\}$ in $\mathbb{R}^d$, Gaussian Mixture Model models the density $f(x)$ of $X$ as a mixture of $K$ Gaussian components, expressed as:
 
 $$
 f(x) = \sum_{k=1}^K w_k \phi(x; \mu_k, \Sigma_k),
@@ -213,7 +228,7 @@ $$
 \phi(x; \mu_k, \Sigma_k) = \frac{1}{(2\pi)^{d/2} |\Sigma_k|^{1/2}} \exp\left(-\frac{1}{2}(x - \mu_k)^\top \Sigma_k^{-1} (x - \mu_k)\right).
 $$
 
-Here, $\mu_k \in \mathbb{R}^d$ and $\Sigma_k \in \mathbb{R}^{d \times d}$ are the mean vector and covariance matrix of the $k$-th component and $d$ is the dimensionality of the data. GMMs are particularly well-suited for AKDE, as they combine parametric modeling's structure with the flexibility required for adaptive density estimation.
+Here, $\mu_k \in \mathbb{R}^d$ and $\Sigma_k \in \mathbb{R}^{d \times d}$ are the mean vector and covariance Hermitian, positive-definite matrix of the $k$-th component and $d$ is the dimensionality of the data. GMMs are particularly well-suited for AKDE, as they combine parametric modeling's structure with the flexibility required for adaptive density estimation.
 
 The parameters of the GMM—weights $w_k$, means $\mu_k$, and covariance matrices $\Sigma_k$—are optimized using the EM algorithm, which alternates between the *E-step* and *M-step*. The EM algorithm maximizes the log-likelihood of the observed data. For a dataset $X = \{x_1, x_2, \dots, x_n\}$, the log-likelihood of the GMM is given by:
 
@@ -239,7 +254,7 @@ w_k = \frac{1}{n} \sum_{i=1}^n \gamma_{ik}, \quad
 \Sigma_k = \frac{\sum_{i=1}^n \gamma_{ik} (x_i - \mu_k)(x_i - \mu_k)^\top}{\sum_{i=1}^n \gamma_{ik}}.
 $$
 
-These updates ensure that the log-likelihood of the data increases with each iteration. The EM process is implemented in the `regEM` function in `akde.py`, which terminates when the change in log-likelihood is below a predefined tolerance.
+These updates ensure that the log-likelihood of the data increases with each iteration. The EM process is implemented in the `regEM` function in `AKDE`, which terminates when the change in log-likelihood is below a predefined tolerance.
 
 After optimizing the GMM parameters, the algorithm evaluates the estimated density function $f(x)$ over a grid of points to enable visualization. This evaluation requires efficient computation of the Gaussian components for large datasets, which is achieved using Cholesky decomposition to factorize each covariance matrix $\Sigma_k$ as:
 
@@ -291,5 +306,5 @@ $$
 
 The algorithm maximizes entropy iteratively, promoting a smooth and unbiased density estimate while avoiding overfitting.
 
-The `akde.py` implementation demonstrates the power of Gaussian Mixture Models in adaptive kernel density estimation. By combining the EM algorithm for parameter optimization, curvature-based bandwidth selection, and entropy maximization, the algorithm achieves flexible and accurate density estimation. The use of Cholesky decomposition ensures computational efficiency and stability, making the algorithm scalable for large datasets and high-dimensional problems. This seamless integration of mathematical rigor and computational efficiency highlights the versatility of GMMs in density estimation.
+The `AKDE` implementation demonstrates the power of Gaussian Mixture Models in adaptive kernel density estimation. By combining the EM algorithm for parameter optimization, curvature-based bandwidth selection, and entropy maximization, the algorithm achieves flexible and accurate density estimation. The use of Cholesky decomposition ensures computational efficiency and stability, making the algorithm scalable for large datasets and high-dimensional problems. This seamless integration of mathematical rigor and computational efficiency highlights the versatility of GMMs in density estimation.
 
