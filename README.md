@@ -23,7 +23,7 @@ Using contour plot or imshow for 2D data, isosurface or volume plot for 3D data
 [matlab]: https://www.mathworks.com/matlabcentral/fileexchange/58312-kernel-density-estimator-for-high-dimensions
 [paper]: https://dx.doi.org/10.1214/10-AOS799
 
-# Gaussian Mixture Mixture Models
+# AKDE: Apdaptive Multivariate Kernel Density Estimation via Gaussian Mixture Model
 
 Given a dataset $X = \{x_1, x_2, \dots, x_n\}$ in $\mathbb{R}^d$, GMM models the density $f(x)$ of $X$ as a mixture of $K$ Gaussian components, expressed as:
 
