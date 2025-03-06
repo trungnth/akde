@@ -210,7 +210,7 @@ fig.write_html("3d-density-akde-plotly.html")
 ![3D Data Density Plot](https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/3d-density.png)
 
 ## Performance Test
-Below, we compare the performance of AKDE with various KDE implementations in Python by computing the Mean Squared Error (MSE), Kullback–Leibler (KL) divergence, and Jensen–Shannon (JS) divergence between the estimated density and the true distribution. Additionally, a goodness-of-fit test can be conducted using the SciPy one-sample or two-sample Kolmogorov-Smirnov test. For multidimensional cases, the `fasano.franceschini.test` package in R provides an implementation of the multidimensional Kolmogorov-Smirnov two-sample test.
+Below, we compare the performance of AKDE with various KDE implementations in Python by computing the Mean Squared Error (MSE), Kullback–Leibler (KL) divergence, and Jensen–Shannon (JS) divergence between the estimated density and the true distribution. Additionally, a goodness-of-fit test can be conducted using the SciPy one-sample or two-sample Kolmogorov-Smirnov test. For multidimensional cases, the [fasano.franceschini.test][fasano.franceschini.test] package in R provides an implementation of the multidimensional Kolmogorov-Smirnov two-sample test.
 
 ## 1D KDE implementations with performance metrics
 
@@ -223,6 +223,7 @@ Below, we compare the performance of AKDE with various KDE implementations in Py
 
 [matlab]: https://www.mathworks.com/matlabcentral/fileexchange/58312-kernel-density-estimator-for-high-dimensions
 [paper]: https://dx.doi.org/10.1214/10-AOS799
+[fasano.franceschini.test]: https://doi.org/10.32614/CRAN.package.fasano.franceschini.test
 
 ## Applications
 
