@@ -9,12 +9,33 @@ You can install it via pip:
 pip install akde
 ```
 # Usage
-Providing any data X in numpy array with shape (n,d) (n rows, d columns)
 
 ```python
 from akde import akde
 pdf, meshgrids, bandwidth = akde(X, ng=None, grid=None, gam=None)
 ```
+## Function Descriptions
+
+### `akde(X, ng=None, grid=None, gam=None)`
+
+Performs adaptive kernel density estimation on dataset `X`.
+
+- **`X`**: Input data, shape `(n, d)`, where `n` is the number of samples and `d` is the number of dimensions.
+- **`ng`** (optional): Number of grid points per dimension (default grid size based on dimension `d`).
+- **`grid`** (optional): Custom grid points for density estimation.
+- **`gam`** (optional): Number of Gaussian mixture components. A cost-accuracy tradeoff parameter, where `gam < n`. 
+  The default value is `gam = min(gam or int(np.ceil(n ** 0.5)), n - 1)`. 
+  Larger values may improve accuracy but always decrease speed. To accelerate the computation, reduce the value of `gam`.
+
+#### Returns:
+- **`pdf`**: Estimated density values on the structured coordinate grid of meshgrids (shape: (ng ** d,)).
+  To reshape pdf back to match the original structured grid for visualization:
+  ```python
+   pdf = pdf.reshape((ng,) * d)
+  ```
+- **`meshgrids`**: Grid coordinates for pdf estimation (A list of d arrays, each of shape (ng,) * d)
+- **`bandwidth`**: Estimated optimal kernel bandwidth (shape (d,))
+
 # EXAMPLES
 
 ## 1D data
