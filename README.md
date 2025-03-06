@@ -186,7 +186,7 @@ fig.write_html("3d-density-akde-plotly.html")
 ![3D Data Density Plot](https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/3d-density.png)
 
 # Performance Test
-Below, we compare the performance of AKDE with different KDE implementations in Python by calculating the Mean Squared Error (MSE), Kullback–Leibler (KL) divergence, and Jensen–Shannon (JS) divergence between the estimated density and the true distribution.
+Below, we compare the performance of AKDE with various KDE implementations in Python by computing the Mean Squared Error (MSE), Kullback–Leibler (KL) divergence, and Jensen–Shannon (JS) divergence between the estimated density and the true distribution. Additionally, a goodness-of-fit test can be conducted using the SciPy one-sample or two-sample Kolmogorov-Smirnov test. For multidimensional cases, the `fasano.franceschini.test` package in R provides an implementation of the multidimensional Kolmogorov-Smirnov two-sample test.
 
 ## 1D KDE implementations with performance metrics
 
