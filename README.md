@@ -1,14 +1,13 @@
-﻿# AKDE: Multivariate Apdaptive Kernel Density Estimation via Gaussian Mixture Model
+﻿## AKDE: Multivariate Apdaptive Kernel Density Estimation via Gaussian Mixture Model
 
-AKDE provides a fast, adaptive kernel density estimator based on the Gaussian Mixture Model for multidimensional data. The [original MATLAB implementation][matlab] by Zdravko Botev does not appear to reference the algorithm described in the [corresponding paper][paper]. This Python re-implementation includes automatic grid construction for arbitrary dimensions and provides a detailed explanation of the method.
+AKDE provides a fast, adaptive kernel density estimator based on the Gaussian Mixture Model for multidimensional data. The original [MATLAB implementation][matlab] by Zdravko Botev does not appear to reference the algorithm described in the [corresponding paper][paper]. This Python implementation includes automatic grid construction for arbitrary dimensions and provides a detailed explanation of the method.
 
-# Installation
+## Installation
 
-You can install it via pip:  
 ```
 pip install akde
 ```
-# Usage
+## Usage
 
 ```python
 from akde import akde
@@ -36,7 +35,7 @@ Performs adaptive kernel density estimation on dataset `X`.
 - **`meshgrids`**: Grid coordinates for pdf estimation (A list of d arrays, each of shape (ng,) * d)
 - **`bandwidth`**: Estimated optimal kernel bandwidth (shape (d,))
 
-# EXAMPLES
+## EXAMPLES
 
 ## 1D data
 
@@ -206,7 +205,7 @@ fig.write_html("3d-density-akde-plotly.html")
 
 ![3D Data Density Plot](https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/3d-density.png)
 
-# Performance Test
+## Performance Test
 Below, we compare the performance of AKDE with various KDE implementations in Python by computing the Mean Squared Error (MSE), Kullback–Leibler (KL) divergence, and Jensen–Shannon (JS) divergence between the estimated density and the true distribution. Additionally, a goodness-of-fit test can be conducted using the SciPy one-sample or two-sample Kolmogorov-Smirnov test. For multidimensional cases, the `fasano.franceschini.test` package in R provides an implementation of the multidimensional Kolmogorov-Smirnov two-sample test.
 
 ## 1D KDE implementations with performance metrics
@@ -221,7 +220,27 @@ Below, we compare the performance of AKDE with various KDE implementations in Py
 [matlab]: https://www.mathworks.com/matlabcentral/fileexchange/58312-kernel-density-estimator-for-high-dimensions
 [paper]: https://dx.doi.org/10.1214/10-AOS799
 
-# The Math Behind AKDE
+## Applications
+
+- Probability density estimation (Galaxy Distribution, Stellar Population, distributions of temperature, wind speed, and precipitation, air pollutant concentration distribution...)
+- Anomaly detection (Exoplanet Detection, characterization of rock mass discontinuities...)
+- Machine learning preprocessing
+
+## License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+## Contributions
+
+Contributions are welcome! Feel free to submit a pull request or open an issue.
+
+## Author
+
+**Trung Nguyen**  
+GitHub: [@trungnth](https://github.com/trungnth)  
+Email: trungnth@dnri.vn
+
+## The Math Behind AKDE
 
 Kernel density estimation is a widely used statistical tool for estimating the probability density function of data from a finite sample. Traditional KDE techniques estimate the density using a weighted sum of kernel functions centered at the data points. The density is expressed as:
 
