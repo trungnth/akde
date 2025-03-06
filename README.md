@@ -1,4 +1,4 @@
-﻿## AKDE: Multivariate Apdaptive Kernel Density Estimation via Gaussian Mixture Model
+﻿## AKDE: Multivariate Adaptive Kernel Density Estimation Using Gaussian Mixture Model
 
  <p align="center">
   <img width="128" height="128" src="https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/akde-3d-density1.png">
