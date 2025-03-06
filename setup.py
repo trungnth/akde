@@ -2,10 +2,10 @@ from setuptools import setup, find_packages
 
 setup(
     name="akde",
-    version="0.1.0",
+    version="1.0.0",
     author="Trung Nguyen",
     author_email="trungnth@dnri.vn",
-    description="Multivariate Adaptive Kernel Density Estimation via Gaussian Mixture Models",
+    description="Multivariate Adaptive Kernel Density Estimation via Gaussian Mixture Model",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/trungnth/akde",
