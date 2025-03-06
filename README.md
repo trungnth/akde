@@ -1,5 +1,7 @@
 ﻿## AKDE: Multivariate Adaptive Kernel Density Estimation Using Gaussian Mixture Model
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14982700.svg)](https://doi.org/10.5281/zenodo.14982700)
+
  <p align="center">
   <img width="128" height="128" src="https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/akde-3d-density1.png">
 </p>
