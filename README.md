@@ -1,6 +1,8 @@
 ﻿## AKDE: Multivariate Apdaptive Kernel Density Estimation via Gaussian Mixture Model
 
- ![akde logo](https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/akde-3d-density1.png)
+ <p align="center">
+  <img width="128" height="128" src="https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/akde-3d-density1.png">
+</p>
 
 AKDE provides a fast, adaptive kernel density estimator based on the Gaussian Mixture Model for multidimensional data. The original [MATLAB implementation][matlab] by Zdravko Botev does not appear to reference the algorithm described in the [corresponding paper][paper]. This Python implementation includes automatic grid construction for arbitrary dimensions and provides a detailed explanation of the method.
 
