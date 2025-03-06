@@ -259,7 +259,7 @@ $$
 K(x) = (2\pi)^{-d/2} \exp\left(-\frac{\|x\|^2}{2}\right).
 $$
 
-Despite its utility, traditional KDE suffers from a major challenge: the scaling efficiently to high-dimensional datasets aka $\texttt{The curse of dimensionality}$. The $\texttt{AKDE}$ method seeks to address these limitations by representing the density as a weighted sum of Gaussian components and refining the parameters of this mixture model iteratively using **Expectation-Maximization (EM) algorithm**. Unlike classical KDE, which evaluates kernel functions directly for all data points, the $\texttt{AKDE}$ method uses a subset of representative points to approximate the density, significantly reducing computational complexity for high-dimensional data.
+Despite its utility, traditional KDE suffers from a major challenge: the scaling efficiently to high-dimensional datasets aka **`The curse of dimensionality`**. The $\texttt{AKDE}$ method seeks to address these limitations by representing the density as a weighted sum of Gaussian components and refining the parameters of this mixture model iteratively using **Expectation-Maximization (EM) algorithm**. Unlike classical KDE, which evaluates kernel functions directly for all data points, the $\texttt{AKDE}$ method uses a subset of representative points to approximate the density, significantly reducing computational complexity for high-dimensional data.
 
 Given a dataset $X = \{x_1, x_2, \dots, x_n\}$ in $\mathbb{R}^d$, Gaussian Mixture Model models the density $f(x)$ of $X$ as a mixture of $K$ Gaussian components, expressed as:
 
@@ -273,7 +273,7 @@ $$
 \phi(x; \mu_k, \Sigma_k) = \frac{1}{(2\pi)^{d/2} |\Sigma_k|^{1/2}} \exp\left(-\frac{1}{2}(x - \mu_k)^\top \Sigma_k^{-1} (x - \mu_k)\right).
 $$
 
-Here, $\mu_k \in \mathbb{R}^d$ and $\Sigma_k \in \mathbb{R}^{d \times d}$ are the mean vector and covariance Hermitian, positive-definite matrix of the $k$-th component and $d$ is the dimensionality of the data. GMMs are particularly well-suited for AKDE, as they combine parametric modeling's structure with the flexibility required for adaptive density estimation.
+Here, $\mu_k \in \mathbb{R}^d$ and $\Sigma_k \in \mathbb{R}^{d \times d}$ are the mean vector and covariance Hermitian, positive-definite matrix of the $k$-th component and $d$ is the dimensionality of the data. GMMs are particularly well-suited for $\texttt{AKDE}$, as they combine parametric modeling's structure with the flexibility required for adaptive density estimation.
 
 The parameters of the GMM—weights $w_k$, means $\mu_k$, and covariance matrices $\Sigma_k$—are optimized using the EM algorithm, which alternates between the *E-step* and *M-step*. The EM algorithm maximizes the log-likelihood of the observed data. For a dataset $X = \{x_1, x_2, \dots, x_n\}$, the log-likelihood of the GMM is given by:
 
@@ -349,7 +349,5 @@ $$
 H = -\int f(x) \log f(x) \, dx.
 $$
 
-The algorithm maximizes entropy iteratively, promoting a smooth and unbiased density estimate while avoiding overfitting.
-
-The `AKDE` implementation demonstrates the power of Gaussian Mixture Models in adaptive kernel density estimation. By combining the EM algorithm for parameter optimization, curvature-based bandwidth selection, and entropy maximization, the algorithm achieves flexible and accurate density estimation. The use of Cholesky decomposition ensures computational efficiency and stability, making the algorithm scalable for large datasets and high-dimensional problems. This seamless integration of mathematical rigor and computational efficiency highlights the versatility of GMMs in density estimation.
+The algorithm maximizes entropy iteratively, promoting a smooth and unbiased density estimate while avoiding overfitting. The `AKDE` implementation demonstrates the power of Gaussian Mixture Models in adaptive kernel density estimation. By combining the EM algorithm for parameter optimization, curvature-based bandwidth selection, and entropy maximization, the algorithm achieves flexible and accurate density estimation. The use of Cholesky decomposition ensures computational efficiency and stability, making the algorithm scalable for large datasets and high-dimensional problems. This seamless integration of mathematical rigor and computational efficiency highlights the versatility of GMMs in density estimation.
 
