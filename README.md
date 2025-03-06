@@ -4,7 +4,7 @@
   <img width="128" height="128" src="https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/akde-3d-density1.png">
 </p>
 
-AKDE provides a fast, adaptive kernel density estimator based on the Gaussian Mixture Model for multidimensional data. The original [MATLAB implementation][matlab] by Zdravko Botev does not appear to reference the algorithm described in the [corresponding paper][paper]. This Python implementation includes automatic grid construction for arbitrary dimensions and provides a detailed explanation of the method.
+AKDE provides a fast, adaptive kernel density estimator based on the Gaussian Mixture Model for multidimensional data. This Python implementation includes automatic grid construction for arbitrary dimensions and provides a detailed explanation of the method.
 
 ## Installation
 
@@ -246,6 +246,8 @@ GitHub: [@trungnth](https://github.com/trungnth)
 Email: trungnth@dnri.vn
 
 ## The Math Behind AKDE
+
+The original [MATLAB implementation][matlab] by Zdravko Botev does not seem to reference the algorithm described in the [corresponding paper][paper]. Below, we present the mathematical foundation of the algorithm used in the AKDE method.
 
 Kernel density estimation is a widely used statistical tool for estimating the probability density function of data from a finite sample. Traditional KDE techniques estimate the density using a weighted sum of kernel functions centered at the data points. The density is expressed as:
 
