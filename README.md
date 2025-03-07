@@ -1,6 +1,8 @@
 ﻿## AKDE: Multivariate Adaptive Kernel Density Estimation Using Gaussian Mixture Model
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14982700.svg)](https://doi.org/10.5281/zenodo.14982700)
+![PyPI](https://img.shields.io/pypi/v/akde?label=pypi%20akde)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/AKDE)
 
  <p align="center">
   <img width="128" height="128" src="https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/akde-3d-density1.png">
