@@ -315,8 +315,8 @@ Below, we compare the performance of AKDE with various KDE implementations in Py
 
 ## Applications
 
-- Probability density estimation (Galaxy Distribution, Stellar Population, distributions of temperature, wind speed, and precipitation, air pollutant concentration distribution...)
-- Anomaly detection (Exoplanet Detection, characterization of rock mass discontinuities...)
+- Probability density estimation
+- Anomaly detection
 - Machine learning preprocessing
 
 ## License
