@@ -24,9 +24,6 @@ pdf, meshgrids, bandwidth = akde(X)
 
 Z = pdf.reshape(meshgrids[0].shape)
 
-# Normalize Z for color mapping
-Z_norm = (Z - Z.min()) / (Z.max() - Z.min())
-
 fig = go.Figure(data=[
     go.Surface(
         x=meshgrids[0], y=meshgrids[1], z=Z,
