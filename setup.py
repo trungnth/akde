@@ -5,7 +5,7 @@ setup(
     version="1.0.1",
     author="Trung Nguyen",
     author_email="trungnth@dnri.vn",
-    description="Multivariate Adaptive Kernel Density Estimation via Gaussian Mixture Model",
+    description="Multivariate Adaptive Kernel Density Estimation Using Gaussian Mixture Model",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/trungnth/akde",
