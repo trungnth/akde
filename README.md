@@ -6,6 +6,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14982700.svg)](https://doi.org/10.5281/zenodo.14982700)
 ![PyPI](https://img.shields.io/pypi/v/akde?label=pypi%20akde)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/AKDE)
+[![PyPI Downloads](https://static.pepy.tech/badge/akde)](https://pepy.tech/projects/akde)
 <!-- badges: end -->
 
 AKDE provides a accurate, adaptive kernel density estimator based on the Gaussian Mixture Model for multidimensional data. This Python implementation includes automatic grid construction for arbitrary dimensions and provides a detailed explanation of the method.
