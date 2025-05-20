@@ -42,7 +42,7 @@ Performs adaptive kernel density estimation on dataset `X`.
    pdf = pdf.reshape((ng,) * d)
   ```
 - **`meshgrids`**: Grid coordinates for pdf estimation (A list of d arrays, each of shape (ng,) * d)
-- **`bandwidth`**: Estimated optimal kernel bandwidth (shape (d,))
+- **`bandwidth`**: Estimated global optimal kernel bandwidth (shape (d,))
 
 ## EXAMPLES
 
