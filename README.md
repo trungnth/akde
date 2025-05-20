@@ -3,7 +3,7 @@
 <img src="https://raw.githubusercontent.com/trungnth/akde/refs/heads/main/media/akde-3d-density.png" width="200" align="right"/>
 
  <!-- badges: start -->
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14982700.svg)](https://doi.org/10.5281/zenodo.14982700)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15011747.svg)](https://doi.org/10.5281/zenodo.15011747)
 ![PyPI](https://img.shields.io/pypi/v/akde?label=pypi%20akde)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/AKDE)
 [![PyPI Downloads](https://static.pepy.tech/badge/akde)](https://pepy.tech/projects/akde)
