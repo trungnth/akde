@@ -334,7 +334,7 @@ Contributions are welcome! Feel free to submit a pull request or open an issue.
 GitHub: [@trungnth](https://github.com/trungnth)  
 Email: trungnth@dnri.vn
 
-## The Math Behind the AKDE
+## Description of the AKDE Method 
 
 The original [MATLAB implementation][matlab] by Zdravko Botev does not seem to reference the algorithm described in the [corresponding paper][paper]. Below, we present the mathematical foundation of the algorithm used in the AKDE method.
 
